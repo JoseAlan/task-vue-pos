@@ -7,8 +7,12 @@
         <router-link
           :to="{ name: 'showTaskgroup', params: { id: taskgroup.id } }"
         >{{ taskgroup.name }}</router-link>
+        <router-link
+          :to = "{ name: 'deleteTaskgroup', params: {id: taskgroup.id}}"
+          >Delete</router-link>
       </li>
     </ul>
+     <button @click="goCreate()">Create Taskgroup</button>
   </div>
 </template>
 
@@ -22,9 +26,16 @@ export default {
     };
   },
   mounted: function() {
-    getTaskgroupsApi().then(response => {
-      this.taskgroups = response.data.data;
-    });
+    getTaskgroupsApi().then(
+      result => (this.taskgroups = result.data.data),
+      error => console.log(error.response.data.error_message)
+    );
+  },
+  methods:{
+      goCreate(){
+        this.$router.push({name: "createTaskgroup"});
+                
+      },
   }
 };
 </script>

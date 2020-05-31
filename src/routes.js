@@ -3,6 +3,7 @@ import Login from "./components/login/Login.vue";
 import ListTaskgroup from "./components/taskgroup/list-taskgroup/ListTaskgroup.vue";
 import ShowTaskgroup from "./components/taskgroup/show-taskgroup/ShowTaskgroup.vue";
 import CreateTaskgroup from './components/taskgroup/create-taskgroup/CreateTaskgroup.vue';
+import DeleteTaskgroup from './components/taskgroup/delete-taskgroup/DeleteTaskgroup.vue';
 
 export const routes = [
   {
@@ -22,6 +23,15 @@ export const routes = [
     name:'createTaskgroup',
     path:'/taskgroup/create',
     component: CreateTaskgroup,
+    meta: {
+        requiresAuth: true
+    }
+  },
+  {
+    name:'deleteTaskgroup',
+    path:'/taskgroup/delete/:id',
+    component: DeleteTaskgroup,
+    props: true,
     meta: {
         requiresAuth: true
     }
