@@ -27,6 +27,12 @@ export const getTaskgroupsApi = () => {
   return axios.get(TASKGROUP_URL, getRequestConfig());
 };
 
+export const createTaskgroupsApi = (name, description, frequence_type) => {
+  const params = {name, description, frequence_type};
+
+  return axios.post(TASKGROUP_URL, params, getRequestConfig());
+};
+
 export const getTaskgroupApi = id => {
   const getTaskgroupApiURL = `${TASKGROUP_URL}/${id}`;
 
