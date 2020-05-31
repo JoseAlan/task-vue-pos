@@ -1,20 +1,25 @@
-// ./router.js
-import VueRouter from "vue-router";
+import VueRouter from "vue-router"
 
 import { routes } from "./routes";
 
 const router = new VueRouter({ routes, mode: "history" });
+const isAuthRequired = record => record.meta.requiresAuth;
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("token")) {
-      next();
-      return;
+    const isLogged = localStorage.getItem("token");
+    if(to.name == 'login' && isLogged){
+        next("/taskgroup/list");
+        return;
     }
-    next("/login");
-  } else {
+    if(to.matched.some(isAuthRequired)){
+        if(!isLogged){
+            next("/login");
+            return;
+        }
+
+    }
     next();
-  }
+    
 });
 
 export default router;

@@ -9,28 +9,25 @@
             <label>Description:</label>
             <input type="text" v-model="description"/>
         </div>
-        <div>
-            <label>FrequenceType:</label>
-            <input type="text" v-model="frequence_type"/>
-        </div>
-        <button @click="createTaskgroup(name, description, frequence_type)">Create</button>
+        <button @click="createTaskitem(name, description)">Create</button>
     </div>
 </template>
 
 <script>
-import {createTaskgroupsApi} from "./../../../services/api";
+import {createTaskitemApi} from "./../../../services/api";
 export default {
+    props: ["id"],
     data(){
         return{
             name: "",
-            description: "",
-            frequence_type: ""
+            description: ""
         };
     },
     methods:{
-            createTaskgroup(name, description, frequence_type){
-                createTaskgroupsApi(name, description, frequence_type).then( 
+            createTaskitem(name, description){
+                createTaskitemApi(name, description, this.id).then( 
                     result => {
+                        //localStorage.token = result.data.token;
                         this.$router.push({name: "listTaskgroup"});
                     },
                     error => console.log(error.response.data.error_message)

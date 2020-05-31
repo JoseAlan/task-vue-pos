@@ -2,6 +2,13 @@
 
 > A Vue.js project 
 
+- Create taskgroup: ok
+- delete taskgroup: ok
+- Create taskitem: ok
+- delete taskitem: incomplete
+- alter name taskitem: no
+- login / logotu button: ok
+
 ## Build Setup
 
 ``` bash
